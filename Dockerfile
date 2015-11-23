@@ -1,4 +1,4 @@
-# dockerRun: -v $(pwd):/workspace -p 80:80 -it
+# dockerRun: -v $(pwd):/workspace -v $(pwd)/dist:/root/workspace/dist -v $(pwd)/src:/root/workspace/src -p 80:80 -it
 FROM nginx
 
 RUN \
@@ -13,9 +13,9 @@ RUN \
 mkdir -p /root/workspace; \
 mv /usr/share/nginx/html /usr/share/nginx/html_ori; \
 ln -s /workspace/dist /usr/share/nginx/html; \
-ln -s /workspace/src /root/workspace/src; \
-ln -s /workspace/dist /root/workspace/dist; \
-ln -s /workspace/Gruntfile.js /root/workspace/Gruntfile.js;
+ln -s /workspace/Gruntfile.js /root/workspace/Gruntfile.js; \
+mkdir -p /root/workspace/src; \
+mkdir -p /root/workspace/dist;
 
 ADD package.json /root/workspace/
 
